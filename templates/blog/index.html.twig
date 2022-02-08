@@ -6,20 +6,28 @@
 {% block body %}
 
 	<section class="row articles">
-        {# 1er article #}
-		<article>
+    
+	{# la variable article est déclarée au moment du for, c'est une variable de réception : elle va réceptionner un article par tour de boucle #}
+	{# la variable articles correspond à l'indice 'articles' du tableau de paramètres de la méthode render() dans la méthode index() du fichier BlogController.php #}
+	{# boucle for pour récupérer chaque article qui se trouve dans notre tableau articles #}
+		{% for article in articles %}
 
-			<h2>Titre de l'article</h2>
+		<article class="col-md-4 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
 
-			<div class="metadata">Ecrit le 08/02/2022 à 09:58 dans la catégorie Politique</div>
+			{# syntaxe TWIG : la propriété $title de la classe Article est privée. Symphony essaye d'y accéder, puis fait appel au getter pour pouvoir y accéder #}
+			<h2> {{ article.title }} </h2>
+
+			{# createdAt est un objet DateTime, donc il est impossible de l'afficher tel quel. Nous devons utiliser un filtre TWIG qui va convertir l'objet DateTime en une chaîne de caractères #}
+			{# on précise avec date("d/m/Y à H:i:s") le format pour la date et l'heure que l'on souhaite afficher#}
+			<div class="metadata">Ecrit le {{ article.createdAt|date("d/m/Y à H:i:s") }} dans la catégorie Politique</div>
 
 			<div class="content">
 
-				<img src="" alt="">
+				<img src="{{ article.image }}" alt="">
 
-				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat maxime vel quos nulla voluptatem facilis in minus veniam blanditiis error exercitationem sequi ipsum hic delectus, eaque quis deserunt. Quasi, velit.</p>
-
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt labore, dolorem unde voluptas, illum, vitae tempora eos quibusdam laboriosam velit obcaecati ducimus.</p>
+				
+				{# le filtre raw permet d'interpréter les balises html lors de l'affichage #}
+				{{ article.content|raw }}
 
                 {# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
                 {# Ce lien changera automatiquement en cas de modification des routes #}
@@ -29,50 +37,8 @@
 
 		</article>
 
-        {# 2ème article #}
-        	<article>
-
-			<h2>Titre de l'article</h2>
-
-			<div class="metadata">Ecrit le 08/02/2022 à 09:58 dans la catégorie Politique</div>
-
-			<div class="content">
-
-				<img src="" alt="">
-
-				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat maxime vel quos nulla voluptatem facilis in minus veniam blanditiis error exercitationem sequi ipsum hic delectus, eaque quis deserunt. Quasi, velit.</p>
-
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt labore, dolorem unde voluptas, illum, vitae tempora eos quibusdam laboriosam velit obcaecati ducimus.</p>
-
-                {# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
-                {# Ce lien changera automatiquement en cas de modification des routes #}
-				<a href="{{ path('blog_show') }}" class="btn btn-primary">Lire la suite</a>
-
-			</div>
-
-		</article>
-         {# 3ème article #}
-        	<article>
-
-			<h2>Titre de l'article</h2>
-
-			<div class="metadata">Ecrit le 08/02/2022 à 09:58 dans la catégorie Politique</div>
-
-			<div class="content">
-
-				<img src="" alt="">
-
-				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat maxime vel quos nulla voluptatem facilis in minus veniam blanditiis error exercitationem sequi ipsum hic delectus, eaque quis deserunt. Quasi, velit.</p>
-
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt labore, dolorem unde voluptas, illum, vitae tempora eos quibusdam laboriosam velit obcaecati ducimus.</p>
-
-                {# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
-                {# Ce lien changera automatiquement en cas de modification des routes #} 
-				<a href="{{ path('blog_show') }}" class="btn btn-primary">Lire la suite</a>
-
-			</div>
-
-		</article>
+			{# fin de la boucle for #}
+			{% endfor %}
 
 	</section>
 
