@@ -1,0 +1,27 @@
+{# extends permet d'hériter d'un template #}
+{% extends "base.html.twig" %}
+
+{% block title %}
+Page d'accueil
+{% endblock title %} 
+
+{# lorsqu'on hérite d'un template via extends, tout le contenu de notre page, pour être lu, doit être enfermé dans des blocks #}
+{# nous ne pouvons pas écrire de code hors des blocks #}
+{# on ouvre le block body #}
+ {% block body %}
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ad dolores ratione voluptates incidunt vel aspernatur cumque. Ad, eius, eum eaque ducimus, quaerat voluptates iure eos accusantium asperiores a quas?</p>
+
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni consectetur quod eaque inventore necessitatibus eligendi omnis, tempore impedit excepturi nostrum temporibus beatae praesentium aperiam autem deleniti dicta iure animi quidem!</p>
+
+{# Affichage du contenu de la variable title récupérée depuis le controller BlogController #}
+<h1>{{ title }}</h1>
+
+
+{% if age >= 18 %}
+    <p>Tu es majeur</p>
+{% else %}
+     <p>Tu es mineur</p>
+{% endif %}
+
+{# on ferme le block body #}
+{% endblock body %}

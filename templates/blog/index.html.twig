@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles
+{% endblock title %}
+
+{% block body %}
+
+	<section class="row articles">
+        {# 1er article #}
+		<article>
+
+			<h2>Titre de l'article</h2>
+
+			<div class="metadata">Ecrit le 08/02/2022 à 09:58 dans la catégorie Politique</div>
+
+			<div class="content">
+
+				<img src="" alt="">
+
+				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat maxime vel quos nulla voluptatem facilis in minus veniam blanditiis error exercitationem sequi ipsum hic delectus, eaque quis deserunt. Quasi, velit.</p>
+
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt labore, dolorem unde voluptas, illum, vitae tempora eos quibusdam laboriosam velit obcaecati ducimus.</p>
+
+                {# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
+                {# Ce lien changera automatiquement en cas de modification des routes #}
+				<a href="{{ path('blog_show') }}" class="btn btn-primary">Lire la suite</a>
+
+			</div>
+
+		</article>
+
+        {# 2ème article #}
+        	<article>
+
+			<h2>Titre de l'article</h2>
+
+			<div class="metadata">Ecrit le 08/02/2022 à 09:58 dans la catégorie Politique</div>
+
+			<div class="content">
+
+				<img src="" alt="">
+
+				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat maxime vel quos nulla voluptatem facilis in minus veniam blanditiis error exercitationem sequi ipsum hic delectus, eaque quis deserunt. Quasi, velit.</p>
+
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt labore, dolorem unde voluptas, illum, vitae tempora eos quibusdam laboriosam velit obcaecati ducimus.</p>
+
+                {# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
+                {# Ce lien changera automatiquement en cas de modification des routes #}
+				<a href="{{ path('blog_show') }}" class="btn btn-primary">Lire la suite</a>
+
+			</div>
+
+		</article>
+         {# 3ème article #}
+        	<article>
+
+			<h2>Titre de l'article</h2>
+
+			<div class="metadata">Ecrit le 08/02/2022 à 09:58 dans la catégorie Politique</div>
+
+			<div class="content">
+
+				<img src="" alt="">
+
+				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat maxime vel quos nulla voluptatem facilis in minus veniam blanditiis error exercitationem sequi ipsum hic delectus, eaque quis deserunt. Quasi, velit.</p>
+
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt labore, dolorem unde voluptas, illum, vitae tempora eos quibusdam laboriosam velit obcaecati ducimus.</p>
+
+                {# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
+                {# Ce lien changera automatiquement en cas de modification des routes #} 
+				<a href="{{ path('blog_show') }}" class="btn btn-primary">Lire la suite</a>
+
+			</div>
+
+		</article>
+
+	</section>
+
+{% endblock body %}
