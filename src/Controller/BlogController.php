@@ -43,11 +43,21 @@ class BlogController extends AbstractController
         ]);
     }
 
-    #[Route('/blog/12', name: 'blog_show')]
-    public function show()
+    // {} permet d'indiquer que c'est un paramètre
+    #[Route('/blog/{id}', name: 'blog_show')]
+    public function show($id)
     {
+         /* on créer une variable $repo dans laquelle on récupère notre repository de l'entity Article pour récupérer les articles en BDD
+        Je demande à Doctrine de me fournir le repository de la classe Article */
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+
+        // find() est une méthode magique du repository permettant de récupérer un seul article en fonction de son id
+        $article = $repo->find($id);
+
+
         return $this->render('blog/show.html.twig', [
-            
+             // j'envoie l'article $article à la vue
+            'article' => $article
         ]);
     }
 }

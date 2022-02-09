@@ -31,7 +31,8 @@
 
                 {# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
                 {# Ce lien changera automatiquement en cas de modification des routes #}
-				<a href="{{ path('blog_show') }}" class="btn btn-primary">Lire la suite</a>
+				{# pour pouvoir générer un lien vers la route blog_show, nous avons besoin d'un paramètre : l'id de l'article (voir la route dans BlogController.php) #}
+				<a href="{{ path('blog_show', {'id': article.id}) }} " class="btn btn-primary">Lire la suite</a>
 
 			</div>
 
