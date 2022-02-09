@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,11 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BlogController extends AbstractController
 {
     #[Route('/blog', name: 'blog')]
-    public function index(): Response
+    public function index(ArticleRepository $repo): Response
     {
         /* on créer une variable $repo dans laquelle on récupère notre repository de l'entity Article pour récupérer les articles en BDD
         Je demande à Doctrine de me fournir le repository de la classe Article */
-        $repo = $this->getDoctrine()->getRepository(Article::class);
+        // $repo = $this->getDoctrine()->getRepository(Article::class);
 
         // la méthode findAll() du repository permet de récupérer tous les articles de la table
         $articles = $repo->findAll();
@@ -45,14 +46,15 @@ class BlogController extends AbstractController
 
     // {} permet d'indiquer que c'est un paramètre
     #[Route('/blog/{id}', name: 'blog_show')]
-    public function show($id)
+    /* Nous utilisons le ParamConverter de Symfony : Symfony voit qu'on a besoin d'un article et d'un id, donc il va chercher l'article correspondant à cet id et l'envoyer dans la méthode show() */
+    public function show(Article $article)
     {
-         /* on créer une variable $repo dans laquelle on récupère notre repository de l'entity Article pour récupérer les articles en BDD
+        /* on créer une variable $repo dans laquelle on récupère notre repository de l'entity Article pour récupérer les articles en BDD
         Je demande à Doctrine de me fournir le repository de la classe Article */
-        $repo = $this->getDoctrine()->getRepository(Article::class);
+        // $repo = $this->getDoctrine()->getRepository(Article::class);
 
         // find() est une méthode magique du repository permettant de récupérer un seul article en fonction de son id
-        $article = $repo->find($id);
+        // $article = $repo->find($id);
 
 
         return $this->render('blog/show.html.twig', [
@@ -60,4 +62,8 @@ class BlogController extends AbstractController
             'article' => $article
         ]);
     }
+
+ 
+
+
 }
