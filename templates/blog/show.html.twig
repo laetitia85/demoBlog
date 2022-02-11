@@ -3,28 +3,34 @@
 
 {% block body %}
 
-	<section class="row article">
+	<!-- Card -->
+<div class="card col-lg-4 col-md-6 mx-auto text-center mb-3 p-3 mt-3 mr-1">
 
-		<article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1"
->
+     <!-- Title -->
+    <h4 class="card-title">{{ article.title}}</h4>
 
-			<h2> {{ article.title}} </h2>
+  <!-- Card image -->
+  <div class="view overlay">
+    <img class="card-img-top" src="{{ article.image }}"
+      alt="Card image cap">
+    <a href="#">
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
 
-			<div class="metadata">Ecrit le {{ article.createdAt|date("d/m/Y à H:i:s") }} dans la catégorie Politique</div>
+  <!-- Card content -->
+  <div class="card-body">
 
-			<hr>
-			<div class="content">
+    <!-- Text -->
+    <p class="card-text">{{ article.content|raw }}</p>
+   <div class="metadata">Ecrit le {{ article.createdAt|date("d/m/Y à H:i:s") }} </div>
+    <!-- Button -->
+    <a href="{{ path('blog')}}" class="btn btn-primary">Retour</a>
 
-				<img src="{{ article.image }}" alt="">
+  </div>
 
-					{# le filtre raw permet d'interpréter les balises html lors de l'affichage #}
-				{{ article.content|raw }}
-				<a href="{{ path('blog') }}" class="btn btn-primary">Retour</a>
+</div>
+<!-- Card -->
 
-			</div>
-
-		</article>
-
-	</section>
 
 {% endblock body %}

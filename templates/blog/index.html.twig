@@ -1,45 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des articles
+{% block title %}
+Liste des articles
 {% endblock title %}
 
 {% block body %}
 
-	<section class="row articles">
-    
-	{# la variable article est déclarée au moment du for, c'est une variable de réception : elle va réceptionner un article par tour de boucle #}
-	{# la variable articles correspond à l'indice 'articles' du tableau de paramètres de la méthode render() dans la méthode index() du fichier BlogController.php #}
-	{# boucle for pour récupérer chaque article qui se trouve dans notre tableau articles #}
+	<section class="row">
 		{% for article in articles %}
+			{# la variable article est déclarée au moment du for, c'est une variable de réception : elle va réceptionner un article par tour de boucle #}
+			{# la variable articles correspond à l'indice 'articles' du tableau de paramètres de la méthode render() dans la méthode index() du fichier BlogController.php #}
+			{# boucle for pour récupérer chaque article qui se trouve dans notre tableau articles #}
+			<!-- Card -->
+				<div class="card col-lg-3 col-md-3 text-center m-3 p-3 mt-3"> {# syntaxe TWIG : la propriété $title de la classe Article est privée. Symphony essaye d'y accéder, puis fait appel au getter pour pouvoir y accéder #}
+				{# Title #}
+					<h4 class="card-title"> {{ article.title }}
+				</h4>
 
-		<article class="col-md-4 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+				<!-- Card image -->
+				<div class="view overlay">
+					<img class="card-img-top" src="{{ article.image }}" alt="Card image cap">
+					<a href="">
+						<div class="mask rgba-white-slight"></div>
+					</a>
+				</div>
 
-			{# syntaxe TWIG : la propriété $title de la classe Article est privée. Symphony essaye d'y accéder, puis fait appel au getter pour pouvoir y accéder #}
-			<h2> {{ article.title }} </h2>
-
-			{# createdAt est un objet DateTime, donc il est impossible de l'afficher tel quel. Nous devons utiliser un filtre TWIG qui va convertir l'objet DateTime en une chaîne de caractères #}
-			{# on précise avec date("d/m/Y à H:i:s") le format pour la date et l'heure que l'on souhaite afficher#}
-			<div class="metadata">Ecrit le {{ article.createdAt|date("d/m/Y à H:i:s") }} dans la catégorie Politique</div>
-
-			<div class="content">
-
-				<img src="{{ article.image }}" alt="">
-
-				
-				{# le filtre raw permet d'interpréter les balises html lors de l'affichage #}
-				{{ article.content|raw }}
-
-                {# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
-                {# Ce lien changera automatiquement en cas de modification des routes #}
-				{# pour pouvoir générer un lien vers la route blog_show, nous avons besoin d'un paramètre : l'id de l'article (voir la route dans BlogController.php) #}
-				<a href="{{ path('blog_show', {'id': article.id}) }} " class="btn btn-primary">Lire la suite</a>
-
+				<!-- Card content -->
+				<div
+					class="card-body">
+						{# Date #}
+					<div class="metadata">Ecrit le
+						{{ article.createdAt|date("d/m/Y à H:i:s") }}
+					</div>
+					{# Description #}
+					<p class="card-text">{{ article.content|raw }}</p>
+					{# Button #}
+					{# path() est une fonction TWIG permettant de générer un lien vers une route grâce au nom de cette route #}
+					{# Ce lien changera automatiquement en cas de modification des routes #}
+					{# pour pouvoir générer un lien vers la route blog_show, nous avons besoin d'un paramètre : l'id de l'article (voir la route dans BlogController.php) #}
+					<a href="{{ path('blog_show', {'id': article.id}) }} " class="btn btn-primary"> En savoir plus</a>
+					<a href="{{ path('blog_edit', {'id': article.id}) }} " class="btn btn-cyan"> Modifier l'article</a>
+				</div>
 			</div>
-
-		</article>
+			{# Card end #}
 
 			{# fin de la boucle for #}
-			{% endfor %}
+		{% endfor %}
 
 	</section>
 
