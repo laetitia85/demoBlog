@@ -1,0 +1,180 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	{# ******************************************************************************************** #}
+	{# ******************************** 1er FORMULAIRE ******************************************** #}
+	{# ******************************************************************************************** #}
+
+	{# <h1 class="text-center mt-3">Création d'un article</h1>
+				<!-- Card -->
+				<div class="card mt-4">
+				
+				  <!-- Card body -->
+				  <div class="card-body">
+				
+				    <!-- Material form register -->
+				    <form action="" method="post">
+				      <p class="h4 text-center py-4">Vous pouvez remplir le formulaire afin d'ajouter un nouvel article </p>
+				
+				      <!-- Material input text -->
+				     
+				       <label for="title" class="font-weight-light">Titre</label>
+				        <input type="text" name="title" id="title" class="form-control" placeholder="Insérer un titre">
+				       
+				      <!-- Material textarea content -->
+				     
+				       <label for="content" class="font-weight-light">Contenu</label>
+				        <textarea name="content" id="content" class="form-control" placeholder="Insérer un contenu"></textarea>
+				
+				             <!-- Material text image -->
+				     
+				        <label for="image" class="font-weight-light">Image</label>
+				        <input type="text" name="image" id="image" class="form-control" placeholder="Insérer une image">
+				   
+				      <div class="text-center py-4 mt-3">
+				        <button class="btn btn-cyan" type="submit" value="Enregistrer">Enregistrer</button>
+				      </div>
+				    </form>
+				    <!-- Material form register -->
+				
+				  </div>
+				  <!-- Card body -->
+				
+				</div>
+				<!-- Card --> #}
+
+	{# ******************************************************************************************** #}
+	{# ***************************** FIN DU 1er FORMULAIRE **************************************** #}
+	{# ******************************************************************************************** #}
+
+
+	{# ******************************************************************************************** #}
+	{# ******************************* 2ème FORMULAIRE ******************************************** #}
+	{# ******************************************************************************************** #}
+
+	{# j'utilise la méthode form et je lui passe en paramètre mon formArticle #}
+	{# la fonction TWIG form() permet d'afficher le rendu d'un formulaire #}
+	{# Symfony est capable de savoir que le champ content est lié  à l'entity Article et que c'est un champ de type "TEXT" #}
+	{# il a donc crée automatiquement un champ textarea dans le formulaire #}
+
+	{# {{ form(formArticle) }} #}
+
+	{# ******************************************************************************************** #}
+	{# ************************* FIN DU 2ème FORMULAIRE ******************************************* #}
+	{# ******************************************************************************************** #}
+
+
+	{# ******************************************************************************************** #}
+	{# ******************************* 3ème FORMULAIRE ******************************************** #}
+	{# ******************************************************************************************** #}
+
+
+		<h1 class="text-center mt-3"> {% if editMode %}
+			Modification de l'article
+		{% else %}
+			Ajouter un article
+		{% endif %}
+	</h1>
+
+	<!-- Card -->
+	<div
+		class="card mt-4">
+
+		<!-- Card body -->
+		<div class="card-body">
+
+			<p class="h4 text-center py-4">
+				{% if editMode %}
+					Vous pouvez remplir le formulaire afin de modifier cet article
+				{% else %}
+					Vous pouvez remplir le formulaire afin d'ajouter un nouvel article
+				{% endif %}
+
+			</p>
+
+			{# ----------------------------------------------------------------------------------------------- #}
+			{# -------------------------------- Méthode avec form_widget() ----------------------------------- #}
+
+			{# <label for="title" class="font-weight-light">Titre</label>
+									{# form_widget() permet d'afficher un champ du formulaire #}
+			{# {{ form_widget(formArticle.title) }}
+						
+									<label for="content" class="font-weight-light">Contenu</label>
+									{{ form_widget(formArticle.content) }}
+						
+									<label for="image" class="font-weight-light">Image</label>
+									{{ form_widget(formArticle.image) }} #}
+
+			{# ------------------------- Fin de la Méthode avec form_widget()--------------------------------- #}
+			{# ----------------------------------------------------------------------------------------------- #}
+
+
+			{# ----------------------------------------------------------------------------------------------- #}
+			{# --------------------------------- Méthode avec form_row() ------------------------------------- #}
+
+			{{ form_start(formArticle) }}
+			{# form_row() permet d'afficher un champ du formulaire et son label #}
+			{# formArticle est un objet qui contient les champs du formulaire #}
+			{{ form_row(formArticle.title, 
+                {
+                'label' : "Titre",
+                'attr' : 
+                        {
+                            'placeholder': "Titre"
+                        }
+                }) 
+            }}
+
+			{{ form_row(formArticle.content,
+                {
+                'label' : "Contenu",
+                'attr' : 
+                        {
+                            'placeholder': "Contenu"
+                        }
+                }) 
+            }}
+
+			{{ form_row(formArticle.image,
+                {
+                    'attr' : 
+                        {
+                            'placeholder': "URL de l'image"
+                        }
+                }) 
+            }}
+
+
+			{# --------------------------- Fin de la Méthode avec form_row()---------------------------------- #}
+			{# ----------------------------------------------------------------------------------------------- #}
+
+				<div class="text-center py-4 mt-3"> <button class="btn btn-cyan" type="submit">
+					{% if editMode %}
+						Enregistrer les modifications
+					{% else %}
+						Ajouter l'article
+					{% endif %}
+
+                    </div>
+				</button>
+                <div class="text-center">
+				<!-- Button -->
+				<a href="{{ path('blog')}}" class="btn btn-cyan">Retour</a>
+                </div>
+			
+
+		</div>
+		<!-- Card body -->
+
+	</div>
+	<!-- Card -->
+
+	{{ form_end(formArticle) }}
+
+{# ******************************************************************************************** #}
+	{# ***************************** FIN DU 3ème FORMULAIRE *************************************** #}
+	{# ******************************************************************************************** #}
+
+
+{% endblock body %}
